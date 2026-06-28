@@ -1,4 +1,4 @@
-package com.moiros.calisthenics;
+package com.moiros.mcinfo;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -1,13 +1,207 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>moiros-calisthenics</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC info</title>
+    <!-- Tailwind CSS for modern layout & styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .color-header { color: #A855F7; } /* Purple */
+        .color-blue { color: #3B82F6; }   /* Blue */
+        .color-cyan { color: #06B6D4; }   /* Cyan */
+        .color-green { color: #22C55E; }  /* Green */
+        .color-yellow { color: #EAB308; } /* Yellow */
+        .color-red { color: #EF4444; }    /* Red */
+        body { background-color: #0F172A; } /* Slate-900 Dark Theme */
+    </style>
+</head>
+<body class="text-slate-200 font-sans min-h-screen flex flex-col justify-between max-w-md mx-auto p-4">
+
+    <!-- Top Branding Header -->
+    <header class="border-b-2 border-purple-500 pb-3 mb-6 text-center">
+        <h1 class="text-xl font-bold color-cyan uppercase tracking-wider">MC info</h1>
+        <p class="text-xs color-header font-mono">=== NATIVE BLUEPRINT CONTAINER ===</p>
+    </header>
+
+    <!-- Main Content Dynamic Container -->
+    <main class="flex-grow flex flex-col justify-center">
+        
+        <!-- VIEW 1: Main Menu -->
+        <div id="view-main-menu" class="space-y-4">
+            <button onclick="navigateToStyle('straight_sets')" class="w-full text-left p-4 bg-slate-800 rounded-lg border border-slate-700 active:bg-slate-700 transition">
+                <span class="color-green font-bold">1.</span> The Strength & Skill Blueprint <span class="color-yellow text-sm block mt-1">(Straight Sets)</span>
+            </button>
+            <button onclick="navigateToStyle('supersets')" class="w-full text-left p-4 bg-slate-800 rounded-lg border border-slate-700 active:bg-slate-700 transition">
+                <span class="color-green font-bold">2.</span> The Express Efficiency Blueprint <span class="color-yellow text-sm block mt-1">(Supersets)</span>
+            </button>
+            <button onclick="showView('view-rir-info')" class="w-full text-left p-4 bg-slate-800 rounded-lg border border-slate-700 active:bg-slate-700 transition">
+                <span class="color-cyan font-bold">3.</span> Understanding RIR (Reps in Reserve)
+            </button>
+        </div>
+
+        <!-- VIEW 2: Sub-Menu (Choose Day) -->
+        <div id="view-sub-menu" class="hidden space-y-4">
+            <h2 id="sub-menu-title" class="text-center font-bold color-header mb-4 text-lg"></h2>
+            <button onclick="displayWorkout('upper')" class="w-full text-left p-4 bg-slate-800 rounded-lg border border-slate-700 active:bg-slate-700 transition">
+                <span class="color-green font-bold">1.</span> Upper Body Day
+            </button>
+            <button onclick="displayWorkout('lower')" class="w-full text-left p-4 bg-slate-800 rounded-lg border border-slate-700 active:bg-slate-700 transition">
+                <span class="color-green font-bold">2.</span> Lower Body & Core Day
+            </button>
+            <button onclick="showView('view-main-menu')" class="w-full text-center p-3 bg-red-950/40 color-red rounded-lg border border-red-900 font-bold active:bg-red-900/40 transition">
+                3. Back to Main Menu
+            </button>
+        </div>
+
+        <!-- VIEW 3: Straight Sets Display -->
+        <div id="view-straight-sets" class="hidden space-y-4">
+            <h2 id="straight-title" class="font-bold color-cyan text-lg text-center"></h2>
+            <p class="text-xs color-yellow text-center italic mb-4">Goal: Maximize progression levels and build raw calisthenics skill.</p>
+            
+            <div class="overflow-x-auto">
+                <div id="straight-container" class="space-y-3">
+                    <!-- Dynamic Rows go here -->
+                </div>
+            </div>
+            <button onclick="showView('view-sub-menu')" class="w-full mt-6 text-center p-3 bg-slate-800 rounded-lg border border-slate-700 font-bold active:bg-slate-700 transition">
+                Back to Menu
+            </button>
+        </div>
+
+        <!-- VIEW 4: Supersets Display -->
+        <div id="view-supersets" class="hidden space-y-4">
+            <h2 id="supersets-title" class="font-bold color-cyan text-lg text-center"></h2>
+            <p class="text-xs color-yellow text-center italic mb-4">Goal: Pair opposing movements to slash workout time in half.</p>
+            
+            <div id="supersets-container" class="space-y-4">
+                <!-- Dynamic Supersets go here -->
+            </div>
+            <button onclick="showView('view-sub-menu')" class="w-full mt-6 text-center p-3 bg-slate-800 rounded-lg border border-slate-700 font-bold active:bg-slate-700 transition">
+                Back to Menu
+            </button>
+        </div>
+
+        <!-- VIEW 5: RIR Info Panel -->
+        <div id="view-rir-info" class="hidden space-y-4 bg-slate-800/60 p-5 rounded-xl border border-slate-700">
+            <h2 class="font-bold color-cyan text-lg text-center mb-2">UNDERSTANDING REPS IN RESERVE</h2>
+            <p class="text-sm color-yellow mb-4 text-center">RIR tracks how many clean reps you have left in the tank before hitting absolute failure.</p>
+            <div class="space-y-3 text-sm">
+                <p><span class="color-green font-bold">* 2 RIR:</span> Stop when you could only do 2 more clean reps. Perfect for heavy strength work without frying your nervous system.</p>
+                <p><span class="color-cyan font-bold">* 1 RIR:</span> Pushing right next to the edge. Ideal for targeting muscle hypertrophy.</p>
+                <p><span class="color-red font-bold">* 0 RIR:</span> Complete physical failure. Your form is totally breaking down.</p>
+            </div>
+            <button onclick="showView('view-main-menu')" class="w-full mt-6 text-center p-3 bg-purple-900/40 color-header rounded-lg border border-purple-700 font-bold active:bg-purple-700/40 transition">
+                Return to Main Menu
+            </button>
+        </div>
+
+    </main>
+
+    <!-- UI Footer -->
+    <footer class="mt-6 pt-3 border-t border-slate-800 text-center text-xs text-slate-500 font-mono">
+        Stay Consistent • Train Hard
+    </footer>
+
+    <!-- JavaScript Engine -->
+    <script>
+        const WORKOUT_DATA = {
+            "straight_sets": {
+                "upper": [
+                    ["1", "Pike Push-ups", "3-4", "5-8 reps", "2 RIR", "2-3 min"],
+                    ["2", "Pull-ups", "3-4", "6-10 reps", "2 RIR", "2-3 min"],
+                    ["3", "Standard / Diamond Push-ups", "3", "8-12 reps", "1-2 RIR", "90 sec"],
+                    ["4", "Inverted Rows (Overhand)", "3", "8-12 reps", "1-2 RIR", "90 sec"],
+                    ["5", "Parallel Bar Dips", "3", "8-12 reps", "1 RIR", "90 sec"],
+                    ["6", "Underhand Inverted Rows", "3", "10-12 reps", "1 RIR", "90 sec"]
+                ],
+                "lower": [
+                    ["1", "Assisted / Chair Pistol Squats", "3-4", "5-8 reps (leg)", "2 RIR", "2-3 min"],
+                    ["2", "Bodyweight Nordic Curls", "3", "4-6 Negatives", "2 RIR", "2-3 min"],
+                    ["3", "Jumping Lunges (Explosive)", "3", "10-12 reps (leg)", "1-2 RIR", "90 sec"],
+                    ["4", "Single-Leg Floor Calf Raises", "3", "12-15 reps (leg)", "0-1 RIR", "60 sec"],
+                    ["5", "Forearm Plank", "3", "45-60 sec hold", "1 RIR", "60 sec"],
+                    ["6", "Hollow Body Hold", "3", "20-45 sec hold", "1 RIR", "60 sec"]
+                ]
+            },
+            "supersets": {
+                "upper": [
+                    { title: "Superset 1: Vertical Power", ex_a: "Pike Push-ups (5–8 reps) | 2 RIR", rest_a: "45s", ex_b: "Pull-ups (6–10 reps) | 2 RIR", rest_b: "90s", rounds: "3–4 total rounds" },
+                    { title: "Superset 2: Horizontal Mass", ex_a: "Standard/Diamond Push-ups (8–12 reps) | 1-2 RIR", rest_a: "30s", ex_b: "Inverted Rows (Overhand) (8–12 reps) | 1-2 RIR", rest_b: "60s", rounds: "3 total rounds" },
+                    { title: "Superset 3: The Arm & Shoulder Pump", ex_a: "Parallel Bar Dips (8–12 reps) | 1 RIR", rest_a: "30s", ex_b: "Underhand Inverted Rows (10–12 reps) | 1 RIR", rest_b: "60s", rounds: "3 total rounds" }
+                ],
+                "lower": [
+                    { title: "Superset 1: The Heavy Strength Split", ex_a: "Assisted Pistol Squats (5–8/leg) | 2 RIR", rest_a: "45s", ex_b: "Nordic Curls (4–6 slow negatives) | 2 RIR", rest_b: "90s", rounds: "3–4 total rounds" },
+                    { title: "Superset 2: Cardio & Core Stability", ex_a: "Jumping Lunges (10–12/leg) | 1-2 RIR", rest_a: "30s", ex_b: "Forearm Plank (45–60s hold) | 1 RIR", rest_b: "60s", rounds: "3 total rounds" },
+                    { title: "Superset 3: Lower Leg & Compression Finish", ex_a: "Single-Leg Calf Raises (12–15/leg) | 0-1 RIR", rest_a: "30s", ex_b: "Hollow Body Hold (20–45s hold) | 1 RIR", rest_b: "60s", rounds: "3 total rounds" }
+                ]
+            }
+        };
+
+        let currentStyle = "straight_sets";
+
+        function showView(viewId) {
+            const views = ['view-main-menu', 'view-sub-menu', 'view-straight-sets', 'view-supersets', 'view-rir-info'];
+            views.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(viewId).classList.remove('hidden');
+        }
+
+        function navigateToStyle(style) {
+            currentStyle = style;
+            const displayTitle = style === "straight_sets" ? "CHOOSE STRATEGY: STRAIGHT SETS" : "CHOOSE STRATEGY: SUPERSETS";
+            document.getElementById('sub-menu-title').innerText = displayTitle;
+            showView('view-sub-menu');
+        }
+
+        function displayWorkout(day) {
+            const label = day === "upper" ? "Upper Body Day" : "Lower Body & Core Day";
+            
+            if (currentStyle === "straight_sets") {
+                document.getElementById('straight-title').innerText = label.toUpperCase();
+                const container = document.getElementById('straight-container');
+                container.innerHTML = "";
+                
+                WORKOUT_DATA["straight_sets"][day].forEach(row => {
+                    const block = document.createElement('div');
+                    block.className = "p-3 bg-slate-800 rounded border border-slate-700 text-sm space-y-1";
+                    block.innerHTML = `
+                        <div class="flex justify-between items-center border-b border-slate-700/60 pb-1 mb-1">
+                            <span class="font-bold color-green">#${row[0]} ${row[1]}</span>
+                            <span class="bg-purple-900/60 border border-purple-700 text-[11px] px-2 py-0.5 rounded color-header font-bold">${row[4]}</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 text-xs text-slate-400 font-mono">
+                            <div>Sets: <span class="text-slate-200">${row[2]}</span></div>
+                            <div>Target: <span class="text-slate-200">${row[3]}</span></div>
+                            <div>Rest: <span class="text-slate-200">${row[5]}</span></div>
+                        </div>
+                    `;
+                    container.appendChild(block);
+                });
+                showView('view-straight-sets');
+            } else {
+                document.getElementById('supersets-title').innerText = label.toUpperCase();
+                const container = document.getElementById('supersets-container');
+                container.innerHTML = "";
+
+                WORKOUT_DATA["supersets"][day].forEach(ss => {
+                    const block = document.createElement('div');
+                    block.className = "p-4 bg-slate-800 rounded-xl border border-slate-700 space-y-2";
+                    block.innerHTML = `
+                        <h3 class="color-cyan font-bold text-sm border-b border-slate-700 pb-1 mb-2">${ss.title}</h3>
+                        <div class="text-xs space-y-2">
+                            <div><span class="color-green font-bold">A:</span> ${ss.ex_a}</div>
+                            <div class="pl-4 font-mono text-slate-400">↳ Rest ${ss.rest_a}</div>
+                            <div><span class="color-green font-bold">B:</span> ${ss.ex_b}</div>
+                            <div class="pl-4 font-mono text-slate-400">↳ Rest ${ss.rest_b}, then cycle for <span class="color-header font-bold font-sans text-xs">${ss.rounds}</span></div>
+                        </div>
+                    `;
+                    container.appendChild(block);
+                });
+                showView('view-supersets');
+            }
+        }
+    </script>
+</body>
 </html>

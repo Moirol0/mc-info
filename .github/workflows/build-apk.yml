@@ -35,6 +35,22 @@ jobs:
       - name: Sync Web App Assets to Capacitor Android
         run: npx cap sync android
 
+      - name: Configure App Name and Launcher Icon
+        run: |
+          echo "🔧 Injecting custom app name..."
+          STRINGS_FILE="android/app/src/main/res/values/strings.xml"
+          if [ -f "$STRINGS_FILE" ]; then
+            sed -i 's/<string name="app_name">.*<\/string>/<string name="app_name">Moiro\&#39;s Calisthenics<\/string>/g' "$STRINGS_FILE"
+          fi
+
+          echo "🎨 Injecting custom app icon layers..."
+          for dir in android/app/src/main/res/mipmap-*; do
+            if [ -d "$dir" ]; then
+              cp public/logo.png "$dir/ic_launcher.png"
+              cp public/logo.png "$dir/ic_launcher_round.png"
+            fi
+          done
+
       - name: Build Debug APK with Gradle
         run: |
           cd android

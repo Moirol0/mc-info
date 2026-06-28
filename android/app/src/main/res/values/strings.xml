@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Moiro\'s Calisthenics</string>
+    <string name="title_activity_main">Moiro\'s Calisthenics</string>
+    <string name="package_name">com.moiros.calisthenics</string>
+    <string name="custom_url_scheme">com.moiros.calisthenics</string>
+</resources>

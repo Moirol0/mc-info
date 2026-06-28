@@ -43,6 +43,9 @@ jobs:
             sed -i 's/<string name="app_name">.*<\/string>/<string name="app_name">Moiro\&#39;s Calisthenics<\/string>/g' "$STRINGS_FILE"
           fi
 
+          echo "🗑️ Removing adaptive XML assets to prevent duplication..."
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
+
           echo "🎨 Injecting custom app icon layers..."
           for dir in android/app/src/main/res/mipmap-*; do
             if [ -d "$dir" ]; then
